@@ -19,7 +19,7 @@ export default class Tournament {
     private loserPool: Array<User>;
     private winnerPool: Array<User>;
 
-    constructor(name: String, description: String, date: Date, location: String, amtStage: SingleOrDoubleStage, amtElim: SingleOrDoubleElimination) {
+    constructor(id: String, name: String, description: String, date: Date, location: String, amtStage: SingleOrDoubleStage, amtElim: SingleOrDoubleElimination) {
         this.name = name;
         this.description = description;
         this.date = date;
@@ -29,7 +29,7 @@ export default class Tournament {
         this.amtStage = amtStage;
         this.amtElim = amtElim;
         this.groups = [];
-        this.id = "";
+        this.id = id;
         this.loserBracket = [];
         this.winnerBracket = [];
         this.loserPool = [];
@@ -92,7 +92,7 @@ export default class Tournament {
         for (let i = 0; i < this.participants.length; i += 2) {
             let homePlayer = this.participants[i];
             let awayPlayer = this.participants[i + 1];
-            this.matches.push(new Match(this.date, this.location, homePlayer, awayPlayer));
+            this.matches.push(new Match(this.date, this.location, homePlayer, awayPlayer, 5));
         }
     }
 
@@ -107,7 +107,7 @@ export default class Tournament {
         for (let i = 0; i < this.participants.length; i += 2) {
             let homePlayer = this.participants[i];
             let awayPlayer = this.participants[i + 1];
-            this.winnerBracket.push(new Match(this.date, this.location, homePlayer, awayPlayer));
+            this.winnerBracket.push(new Match(this.date, this.location, homePlayer, awayPlayer, 5));
         }
     }
 
@@ -125,12 +125,12 @@ export default class Tournament {
         for (let i = 0; i < this.loserPool.length; i += 2) {
             let homePlayer = this.loserPool[i];
             let awayPlayer = this.loserPool[i + 1];
-            this.loserBracket.push(new Match(this.date, this.location, homePlayer, awayPlayer));
+            this.loserBracket.push(new Match(this.date, this.location, homePlayer, awayPlayer, 5));
         }
         for (let i = 0; i < this.winnerPool.length; i += 2) {
             let homePlayer = this.winnerPool[i];
             let awayPlayer = this.winnerPool[i + 1];
-            this.winnerBracket.push(new Match(this.date, this.location, homePlayer, awayPlayer));
+            this.winnerBracket.push(new Match(this.date, this.location, homePlayer, awayPlayer, 5));
         }
 
         this.matches = [...this.winnerBracket, ...this.loserBracket];
@@ -160,10 +160,33 @@ export default class Tournament {
             for (let j = 0; j < participants.length; j += 2) {
                 let homePlayer = participants[j].user;
                 let awayPlayer = participants[j + 1].user;
-                this.matches.push(new Match(this.date, this.location, homePlayer, awayPlayer));
+                this.matches.push(new Match(this.date, this.location, homePlayer, awayPlayer, 5));
             }
         }
     }
 
+    addMatches(matches: Array<Match>) : void {
+        this.matches = matches;
+    }
+
+    addGroups(groups: Array<Group>) : void {
+        this.groups = groups;
+    }
+
+    addWinnerBracket(matches: Array<Match>) : void {
+        this.winnerBracket = matches;
+    }
+
+    addLoserBracket(matches: Array<Match>) : void {
+        this.loserBracket = matches;
+    }
+
+    addWinnerPool(users: Array<User>) : void {
+        this.winnerPool = users;
+    }
+
+    addLoserPool(users: Array<User>) : void {
+        this.loserPool = users;
+    }
 
 }

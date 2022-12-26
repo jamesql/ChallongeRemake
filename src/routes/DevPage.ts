@@ -13,6 +13,7 @@ router.get('/single', (req, res) => {
     let z: String[] = [];
     let x = t.getMatches();
     for (let i = 0; i < x.length; i++) {
+        x[i].setHomePlayerScore(5);
         z.push("Match " + i + ": " + x[i].getHomePlayer().getName() + " - " + x[i].getHomePlayerScore() + " vs " + x[i].getAwayPlayer().getName() + " - " + x[i].getAwayPlayerScore() + " | ");
     }
 

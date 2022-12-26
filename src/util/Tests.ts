@@ -1,5 +1,6 @@
 import User from '../types/User';
 import Tournament from '../types/Tournament';
+import { createTournament } from './Functions';
 export default class Test {
     // a static list of names to use for testing
     static names: String[] = ["James", "Alex", "Mac", "Prab", "Jerry", "Shane", "Joey", 
@@ -8,7 +9,7 @@ export default class Test {
     "Anthony", "Tony", "Irene", "Carl", "Carlton", "Carlito", "Carlitos", "Paul", "Paulie", "Paulie Walnuts", "Jack", "Jackie", "Chris",
     "Christopher", "Frank", "Carly", "Caroline", "Carolina", "Carole", "Carol", "Carolyn", "Carolynn", "Jones", "John", "Johnathan"];
         
-    
+
 
     // generate random names for testing from list no duplicates
     static generateRandomNames(num: number) : String[] {
@@ -33,7 +34,7 @@ export default class Test {
 
     static generateSingleElimination(num: number) : Tournament {
         let users: Array<User> = this.generateRandomUsers(num);
-        let tournament = new Tournament("Single Elimination","", new Date(), "Test Location", "single", "single");
+        let tournament = createTournament("Single Elimination","", new Date(), "Test Location", "single", "single");
         // add users
         for (let i = 0; i < users.length; i++) {
             tournament.addParticipant(users[i]);
