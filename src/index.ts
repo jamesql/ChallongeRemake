@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', require('./routes/API'));
-app.use('v0', require('./routes/DevPage'));
+app.use('/v0', require('./routes/DevPage'));
 
 // start express server
 app.listen(3333, () => {

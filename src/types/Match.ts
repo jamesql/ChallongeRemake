@@ -1,5 +1,4 @@
 import User from './User';
-import Score from './Score';
 export default class Match {
     private id: String;
     private date: Date;
@@ -9,9 +8,10 @@ export default class Match {
     private winner: User | null;
     private loser: User | null;
     private decided: Boolean;
-    private score: Score;
-    constructor(id: String, date: Date, location: String, homePlayer: User, awayPlayer: User) {
-        this.id = id;
+    private _homePlayerScore: number;
+    private _awayPlayerScore: number;
+    constructor(date: Date, location: String, homePlayer: User, awayPlayer: User) {
+        this.id = "";
         this.date = date;
         this.location = location;
         this.homePlayer = homePlayer;
@@ -19,7 +19,49 @@ export default class Match {
         this.winner = null;
         this.loser = null;
         this.decided = false;
-        this.score = new Score(this);
+        this._homePlayerScore = 0;
+        this._awayPlayerScore = 0;
     }
+
+    getID() : String {
+        return this.id;
+    }
+
+    getDate() : Date {
+        return this.date;
+    }
+
+    getLocation() : String {
+        return this.location;
+    }
+
+    getHomePlayer() : User {
+        return this.homePlayer;
+    }
+
+    getAwayPlayer() : User {
+        return this.awayPlayer;
+    }
+
+    getWinner() : User | null {
+        return this.winner;
+    }
+
+    getLoser() : User | null {
+        return this.loser;
+    }
+
+    getDecided() : Boolean {
+        return this.decided;
+    }
+
+    getHomePlayerScore() : number {
+        return this._homePlayerScore;
+    }
+
+    getAwayPlayerScore() : number {
+        return this._awayPlayerScore;
+    }
+
 
 }

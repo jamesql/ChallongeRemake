@@ -1,12 +1,22 @@
 import express from 'express';
+import Test from '../util/Tests';
+import Tournament from '../types/Tournament';
 
 
 
 // create express router
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send('Hello world!');
+router.get('/single', (req, res) => {
+    let t: Tournament = Test.generateSingleElimination(16);
+
+    let z: String[] = [];
+    let x = t.getMatches();
+    for (let i = 0; i < x.length; i++) {
+        z.push("Match " + i + ": " + x[i].getHomePlayer().getName() + " - " + x[i].getHomePlayerScore() + " vs " + x[i].getAwayPlayer().getName() + " - " + x[i].getAwayPlayerScore() + " | ");
+    }
+
+    res.send(z);
 });
 
-export default router;
+module.exports = router;
